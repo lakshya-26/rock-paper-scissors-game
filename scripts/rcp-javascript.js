@@ -74,4 +74,18 @@ function playermove(playermove){
         .innerHTML = `Wins:${score.wins}, Losses:${score.losses}, Ties:${score.ties}`;
     }
     updatescore();
-    
+    let isAutoplaying =false;
+    let intervalID;
+    function autoplay(){
+        if(!isAutoplaying){
+            intervalID = setInterval(function(){
+                const player = pickpcmove();
+                playermove(player);
+            }, 1000);
+            isAutoplaying = true;
+        }
+        else{
+            clearInterval(intervalID);
+            isAutoplaying = false;
+        }
+    }
